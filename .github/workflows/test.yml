@@ -18,6 +18,9 @@ jobs:
         node-version: 18
     - name: install dependecies   
       run: npm ci
-
+    
+    - name: install ts-jest
+      run: npm i ts-jest
+      
     - name: test
       run: npm test
