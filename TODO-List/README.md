@@ -8,6 +8,8 @@ Una vez instaladas las dependencias, ejecutamos los test con
 
 npm test
 
+# Para ejecutar el frontend
+
 Para mostrar la página web, una vez instaladas la dependencias, por consola:
 
 node app.js
