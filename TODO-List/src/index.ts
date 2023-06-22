@@ -1,4 +1,4 @@
-import {Task, addTask, findTask, removeTask} from "../src/task"
+import {Task, addTask, findTask, markTaskAsCompleted, removeTask} from "./task"
 
 let taskList: Task[] = [];
 const list = document.getElementById("lista");
@@ -41,7 +41,6 @@ function addButton(){
             name: name,
             complete: complete,
         }
-
         addTask(task3, taskList);
     }else{
         alert("No has especificado ninguna tarea");
@@ -50,12 +49,23 @@ function addButton(){
 }
 
 function removeButton(){
+    let id:string | null= prompt("Introduce la id de la tarea a eliminar");
 
+    if(id != null){
+        removeTask(taskList, parseInt(id));
+    }else{
+        alert("Id no valida");
+    }
 }
 
-function markAsComplete(){
-    let idSelected = prompt("Introduce la ID de la tarea a marcar como completada");
-    let taskToComplete:Task = findTask(taskList, idSelected);
+function completeTaskButton(){
+    let id:string | null= prompt("Introduce la id de la tarea a marcar como completada");
+
+    if(id != null){
+        markTaskAsCompleted(taskList, parseInt(id));
+    }else{
+        alert("Id no valida");
+    }
 }
 
 window.addEventListener('load', function() {
@@ -65,9 +75,14 @@ window.addEventListener('load', function() {
 document.getElementById("add")?.addEventListener('click', function(){
     addButton();
     showList();
-})
+});
 
 document.getElementById("remove")?.addEventListener('click', function(){
     removeButton();
+    showList();
+});
+
+document.getElementById("complete")?.addEventListener('click', function(){
+    completeTaskButton();
     showList();
 })

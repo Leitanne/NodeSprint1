@@ -40,10 +40,24 @@ export function removeTask(toDoList:Task[], id?:number, task?:Task) : Task | und
     }
 
     if(taskToDelete != undefined){
-        toDoList.splice(toDoList.indexOf(taskToDelete));
+        toDoList.splice(toDoList.indexOf(taskToDelete), 1);
     }
 
     return taskToDelete;
 }
 
+export function markTaskAsCompleted(toDoList:Task[], id:number) : boolean{
+    let taskToComplete:Task | undefined = findTask(toDoList, id);
+    let check;
+
+    if(taskToComplete != undefined){
+        let index: number = toDoList.indexOf(taskToComplete);
+        toDoList[index].complete = true;
+        check = true;
+    }else{
+        check = false;
+    }
+    
+    return check;
+}
 

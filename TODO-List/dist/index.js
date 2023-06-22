@@ -1,4 +1,5 @@
-var _a, _b;
+var _a, _b, _c;
+import { addTask, markTaskAsCompleted, removeTask } from "./task.js";
 var taskList = [];
 var list = document.getElementById("lista");
 var task1 = {
@@ -32,13 +33,29 @@ function addButton() {
             name: name,
             complete: complete,
         };
-        taskList.push(task3);
+        addTask(task3, taskList);
     }
     else {
         alert("No has especificado ninguna tarea");
     }
 }
 function removeButton() {
+    var id = prompt("Introduce la id de la tarea a eliminar");
+    if (id != null) {
+        removeTask(taskList, parseInt(id));
+    }
+    else {
+        alert("Id no valida");
+    }
+}
+function completeTaskButton() {
+    var id = prompt("Introduce la id de la tarea a marcar como completada");
+    if (id != null) {
+        markTaskAsCompleted(taskList, parseInt(id));
+    }
+    else {
+        alert("Id no valida");
+    }
 }
 window.addEventListener('load', function () {
     showList();
@@ -51,4 +68,7 @@ window.addEventListener('load', function () {
     removeButton();
     showList();
 });
-export {};
+(_c = document.getElementById("complete")) === null || _c === void 0 ? void 0 : _c.addEventListener('click', function () {
+    completeTaskButton();
+    showList();
+});

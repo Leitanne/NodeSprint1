@@ -1,4 +1,4 @@
-import {Task, addTask, findTask, removeTask} from "../src/task"
+import {Task, addTask, findTask, markTaskAsCompleted, removeTask} from "../src/task"
 
 let task1 : Task =  {
     id: 1,
@@ -28,6 +28,15 @@ test('I need to find a task', () => {
     expect(taskFound).toBe(task2);
 });
 
+test('I need to mark a task as complete', () => {
+    let idToComplete = 2;
+
+    let check: boolean = markTaskAsCompleted(toDoListTesting, idToComplete);
+    expect(check).toBeTruthy();
+
+    expect(toDoListTesting[idToComplete - 1].complete).toBeTruthy();
+});
+
 test('I need to remove a task', () => {
     let taskFound = findTask(toDoListTesting, 2);
     let taskRemoved = removeTask(toDoListTesting, 2);
@@ -35,3 +44,4 @@ test('I need to remove a task', () => {
     expect(taskRemoved).toBe(taskFound);
     expect(findTask(toDoListTesting, undefined, "Finish test")).toBe(undefined);
 });
+

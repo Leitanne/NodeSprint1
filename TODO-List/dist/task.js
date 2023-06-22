@@ -29,7 +29,20 @@ export function removeTask(toDoList, id, task) {
         taskToDelete = toDoList.find(function (taskFetch) { return taskFetch == task; });
     }
     if (taskToDelete != undefined) {
-        toDoList.splice(toDoList.indexOf(taskToDelete));
+        toDoList.splice(toDoList.indexOf(taskToDelete), 1);
     }
     return taskToDelete;
+}
+export function markTaskAsCompleted(toDoList, id) {
+    var taskToComplete = findTask(toDoList, id);
+    var check;
+    if (taskToComplete != undefined) {
+        var index = toDoList.indexOf(taskToComplete);
+        toDoList[index].complete = true;
+        check = true;
+    }
+    else {
+        check = false;
+    }
+    return check;
 }
