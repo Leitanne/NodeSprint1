@@ -18,15 +18,6 @@ jobs:
         node-version: 18
     - name: install dependecies   
       run: npm ci
-    
-    - name: install ts-jest
-      run: npm i ts-jest
-    
-    - name: install types
-      run: npm i --save-dev @types/jest
-
-    - name: install globals jest  
-      run: npm install --save-dev @jest/globals
       
     - name: test
       run: npm test
