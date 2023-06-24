@@ -1,43 +1,49 @@
-export function addTask(task, toDoList) {
-    var previousLength = toDoList.length;
-    var check = false;
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.markTaskAsCompleted = exports.removeTask = exports.findTask = exports.addTask = void 0;
+function addTask(task, toDoList) {
+    let previousLength = toDoList.length;
+    let check = false;
     toDoList.push(task);
     if (previousLength < toDoList.length) {
         check = true;
     }
     return check;
 }
-export function findTask(toDoList, id, name) {
-    var taskFound;
+exports.addTask = addTask;
+function findTask(toDoList, id, name) {
+    let taskFound;
     if (id != undefined) {
-        taskFound = toDoList.find(function (taskFetch) { return taskFetch.id == id; });
+        taskFound = toDoList.find((taskFetch) => taskFetch.id == id);
     }
     else if (name != undefined) {
-        taskFound = toDoList.find(function (taskFetch) { return taskFetch.name.toLowerCase() == name.toLowerCase(); });
+        taskFound = toDoList.find((taskFetch) => taskFetch.name.toLowerCase() == name.toLowerCase());
     }
     else {
         taskFound = undefined;
     }
     return taskFound;
 }
-export function removeTask(toDoList, id, task) {
-    var taskToDelete = undefined;
+exports.findTask = findTask;
+function removeTask(toDoList, id, task) {
+    let taskToDelete = undefined;
     if (id != undefined) {
-        taskToDelete = toDoList.find(function (taskFetch) { return taskFetch.id == id; });
+        taskToDelete = toDoList.find((taskFetch) => taskFetch.id == id);
     }
     else if (task != undefined) {
-        taskToDelete = toDoList.find(function (taskFetch) { return taskFetch == task; });
+        taskToDelete = toDoList.find((taskFetch) => taskFetch == task);
     }
     if (taskToDelete != undefined) {
         toDoList.splice(toDoList.indexOf(taskToDelete), 1);
     }
     return taskToDelete;
 }
-export function markTaskAsCompleted(toDoList, id) {
-    var taskToComplete = findTask(toDoList, id);
-    var check;
+exports.removeTask = removeTask;
+function markTaskAsCompleted(toDoList, id) {
+    let taskToComplete = findTask(toDoList, id);
+    let check;
     if (taskToComplete != undefined) {
-        var index = toDoList.indexOf(taskToComplete);
+        let index = toDoList.indexOf(taskToComplete);
         toDoList[index].complete = true;
         check = true;
     }
@@ -46,3 +52,4 @@ export function markTaskAsCompleted(toDoList, id) {
     }
     return check;
 }
+exports.markTaskAsCompleted = markTaskAsCompleted;

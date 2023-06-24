@@ -60,4 +60,3 @@ export function markTaskAsCompleted(toDoList:Task[], id:number) : boolean{
     
     return check;
 }
-

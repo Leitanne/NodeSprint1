@@ -1,4 +1,4 @@
-import {Task, addTask, findTask, markTaskAsCompleted, removeTask} from "./task"
+import {Task, addTask, removeTask, markTaskAsCompleted} from "./task"
 
 let taskList: Task[] = [];
 const list = document.getElementById("lista");
