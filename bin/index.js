@@ -2,6 +2,7 @@
 const task = require("../dist/task");
 const readline = require('readline');
 const toDoList = [];
+var lastId = 1;
 
 const rl = readline.createInterface({
     input: process.stdin,
@@ -33,10 +34,14 @@ function consoleMenu(){
 }
 
 function addTaskCLI(args) {
-    var nextid = toDoList.length + 1;
+
+    if(toDoList.length != 0){
+        lastId = toDoList[toDoList.length - 1].id + 1
+    }
+;
 
     let task1 = {
-        id: nextid,
+        id: lastId,
         name: args,
         complete: false
     }
@@ -47,17 +52,19 @@ function addTaskCLI(args) {
 
 function showTasksCLI(){
     for(let i in toDoList){
-        console.log(`${toDoList[i].id}.- ${toDoList[i].name} | complete: ${toDoList[i].complete ? 'Si' : 'No'}`);
+        console.log(`${toDoList[i].id}.- ${toDoList[i].name} | completada: ${toDoList[i].complete ? 'Si' : 'No'}`);
     }
     consoleMenu();
 }
 
-function removeTaskCLI(){
-
+function removeTaskCLI(args){
+    task.removeTask(toDoList, args);
+    showTasksCLI();
 }
 
-function markTaskAsCompletedCLI(){
-
+function markTaskAsCompletedCLI(args){
+    task.markTaskAsCompleted(toDoList, args);
+    showTasksCLI();
 }
 
 function exitCLI(){
