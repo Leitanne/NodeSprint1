@@ -1,6 +1,5 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const task_1 = require("./task");
+import{addTask, removeTask, markTaskAsCompleted} from './task.js';
+
 let taskList = [];
 const list = document.getElementById("lista");
 let task1 = {
@@ -15,6 +14,7 @@ let task2 = {
 };
 taskList.push(task1);
 taskList.push(task2);
+
 function showList() {
     let message = "";
     for (let i in taskList) {
@@ -26,9 +26,10 @@ function showList() {
 }
 function addButton() {
     let id = 0;
-    if (taskList.length != 0) {
-        id = taskList[taskList.length - 1].id + 1;
+    if(taskList.length != 0){
+        id = taskList[taskList.length - 1].id + 1
     }
+
     let name = prompt("Introduce la tarea que quieres añadir");
     let complete = false;
     if (name != null) {
@@ -37,7 +38,7 @@ function addButton() {
             name: name,
             complete: complete,
         };
-        (0, task_1.addTask)(task3, taskList);
+        addTask(task3, taskList);
     }
     else {
         alert("No has especificado ninguna tarea");
@@ -46,7 +47,7 @@ function addButton() {
 function removeButton() {
     let id = prompt("Introduce la id de la tarea a eliminar");
     if (id != null) {
-        (0, task_1.removeTask)(taskList, parseInt(id));
+        removeTask(taskList, parseInt(id));
     }
     else {
         alert("Id no valida");
@@ -55,7 +56,7 @@ function removeButton() {
 function completeTaskButton() {
     let id = prompt("Introduce la id de la tarea a marcar como completada");
     if (id != null) {
-        (0, task_1.markTaskAsCompleted)(taskList, parseInt(id));
+        markTaskAsCompleted(taskList, parseInt(id));
     }
     else {
         alert("Id no valida");

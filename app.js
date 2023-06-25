@@ -8,7 +8,7 @@ router.get('/',function(req,res){
     //__dirname : It will resolve to your project folder.
 });
 
-app.use(express.static(path.join(__dirname, "/dist")));
+app.use(express.static(path.join(__dirname, "/scripts")));
   
 //add the router
 app.use('/', router);

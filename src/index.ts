@@ -31,7 +31,12 @@ function showList(){
 }
 
 function addButton(){
-    let id:number = taskList.length + 1;
+    let id:number = 0;
+
+    if(taskList.length != 0){
+        id = taskList[taskList.length - 1].id + 1
+    }
+
     let name:string | null = prompt("Introduce la tarea que quieres añadir");
     let complete:boolean = false;
 
