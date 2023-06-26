@@ -1,7 +1,7 @@
 #! /usr/bin/env node
-const task = require("../dist/task");
+const taskIn = require("../dist/task");
 const readline = require('readline');
-const toDoList = [];
+let toDoList = [];
 var lastId = 1;
 
 const rl = readline.createInterface({
@@ -39,31 +39,26 @@ function addTaskCLI(args) {
         lastId = toDoList[toDoList.length - 1].id + 1
     }
 ;
-
-    let task1 = {
-        id: lastId,
-        name: args,
-        complete: false
-    }
-
-    task.addTask(task1, toDoList);
+    let task1 = new taskIn.Task(lastId, args);
+    
+    taskIn.Task.addTask(task1, toDoList);
     showTasksCLI();
 }
 
 function showTasksCLI(){
     for(let i in toDoList){
-        console.log(`${toDoList[i].id}.- ${toDoList[i].name} | completada: ${toDoList[i].complete ? 'Si' : 'No'}`);
+        console.log(`${toDoList[i].id}.- ${toDoList[i].name} | completada: ${toDoList[i].isComplete ? 'Si' : 'No'}`);
     }
     consoleMenu();
 }
 
 function removeTaskCLI(args){
-    task.removeTask(toDoList, args);
+    taskIn.Task.removeTask(toDoList, args);
     showTasksCLI();
 }
 
 function markTaskAsCompletedCLI(args){
-    task.markTaskAsCompleted(toDoList, args);
+    taskIn.Task.markTaskAsCompleted(toDoList, args);
     showTasksCLI();
 }
 

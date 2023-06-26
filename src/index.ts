@@ -1,19 +1,10 @@
-import {Task, addTask, removeTask, markTaskAsCompleted} from "./task"
+import {Task} from "./task"
 
 let taskList: Task[] = [];
 const list = document.getElementById("lista");
 
-let task1 : Task =  {
-    id: 1,
-    name: "Finish README file",
-    complete: false,
-}
-
-let task2: Task = {
-    id: 2,
-    name: "Finish test",
-    complete: false,
-}
+let task1 = new Task(1, "Finish README file");
+let task2 = new Task(2, "Finish test");
 
 taskList.push(task1);
 taskList.push(task2);
@@ -22,7 +13,7 @@ function showList(){
     let message:string = "";
 
     for(let i in taskList){
-        message += `${taskList[i].id}.- ${taskList[i].name}. Completed:${(taskList[i].complete ? "Si" : "No")} <br>`
+        message += `${taskList[i].id}.- ${taskList[i].name}. Completed:${(taskList[i].isComplete ? "Si" : "No")} <br>`
     }
 
     if(list != null){
@@ -38,15 +29,10 @@ function addButton(){
     }
 
     let name:string | null = prompt("Introduce la tarea que quieres añadir");
-    let complete:boolean = false;
 
     if(name != null){
-        let task3 : Task = {
-            id: id,
-            name: name,
-            complete: complete,
-        }
-        addTask(task3, taskList);
+        let task3 = new Task(id, name);
+        Task.addTask(task3, taskList);
     }else{
         alert("No has especificado ninguna tarea");
     }
@@ -57,7 +43,7 @@ function removeButton(){
     let id:string | null= prompt("Introduce la id de la tarea a eliminar");
 
     if(id != null){
-        removeTask(taskList, parseInt(id));
+        Task.removeTask(taskList, parseInt(id));
     }else{
         alert("Id no valida");
     }
@@ -67,7 +53,7 @@ function completeTaskButton(){
     let id:string | null= prompt("Introduce la id de la tarea a marcar como completada");
 
     if(id != null){
-        markTaskAsCompleted(taskList, parseInt(id));
+        Task.markTaskAsCompleted(taskList, parseInt(id));
     }else{
         alert("Id no valida");
     }

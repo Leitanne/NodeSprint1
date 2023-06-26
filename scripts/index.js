@@ -1,24 +1,15 @@
-import{addTask, removeTask, markTaskAsCompleted} from './task.js';
-
+"use strict";
+import { Task } from "./task.js";
 let taskList = [];
 const list = document.getElementById("lista");
-let task1 = {
-    id: 1,
-    name: "Finish README file",
-    complete: false,
-};
-let task2 = {
-    id: 2,
-    name: "Finish test",
-    complete: false,
-};
+let task1 = new Task(1, "Finish README file");
+let task2 = new Task(2, "Finish test");
 taskList.push(task1);
 taskList.push(task2);
-
 function showList() {
     let message = "";
     for (let i in taskList) {
-        message += `${taskList[i].id}.- ${taskList[i].name}. Completed:${(taskList[i].complete ? "Si" : "No")} <br>`;
+        message += `${taskList[i].id}.- ${taskList[i].name}. Completed:${(taskList[i].isComplete ? "Si" : "No")} <br>`;
     }
     if (list != null) {
         list.innerHTML = message;
@@ -26,19 +17,13 @@ function showList() {
 }
 function addButton() {
     let id = 0;
-    if(taskList.length != 0){
-        id = taskList[taskList.length - 1].id + 1
+    if (taskList.length != 0) {
+        id = taskList[taskList.length - 1].id + 1;
     }
-
     let name = prompt("Introduce la tarea que quieres añadir");
-    let complete = false;
     if (name != null) {
-        let task3 = {
-            id: id,
-            name: name,
-            complete: complete,
-        };
-        addTask(task3, taskList);
+        let task3 = new Task(id, name);
+        Task.addTask(task3, taskList);
     }
     else {
         alert("No has especificado ninguna tarea");
@@ -47,7 +32,7 @@ function addButton() {
 function removeButton() {
     let id = prompt("Introduce la id de la tarea a eliminar");
     if (id != null) {
-        removeTask(taskList, parseInt(id));
+       Task.removeTask(taskList, parseInt(id));
     }
     else {
         alert("Id no valida");
@@ -56,7 +41,7 @@ function removeButton() {
 function completeTaskButton() {
     let id = prompt("Introduce la id de la tarea a marcar como completada");
     if (id != null) {
-        markTaskAsCompleted(taskList, parseInt(id));
+        Task.markTaskAsCompleted(taskList, parseInt(id));
     }
     else {
         alert("Id no valida");
@@ -65,6 +50,7 @@ function completeTaskButton() {
 window.addEventListener('load', function () {
     showList();
 });
+
 document.getElementById("add")?.addEventListener('click', function () {
     addButton();
     showList();

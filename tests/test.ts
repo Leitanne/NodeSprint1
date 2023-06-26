@@ -1,47 +1,38 @@
-import {Task, addTask, findTask, markTaskAsCompleted, removeTask} from "../src/task"
+import {Task} from "../src/task"
 
-let task1 : Task =  {
-    id: 1,
-    name: "Finish README file",
-    complete: false,
-}
-
+let task1 = new Task(1, "Finish README file");
 let toDoListTesting: Task[] = [task1];
 
-let task2: Task = {
-    id: 2,
-    name: "Finish test",
-    complete: false,
-}
+let task2 = new Task(2, "Finish test");
 
 test('I need to add a task', () => {
-    let check = addTask(task2, toDoListTesting);
+    let check = Task.addTask(task2, toDoListTesting);
     expect(check).toBeTruthy;
-    expect(findTask(toDoListTesting, 2)).toBe(task2);
+    expect(Task.findTask(toDoListTesting, 2)).toBe(task2);
 });
 
 test('I need to find a task', () => {
-    let taskFound:Task | undefined = findTask(toDoListTesting, 1);
+    let taskFound:Task | undefined = Task.findTask(toDoListTesting, 1);
     expect(taskFound).toBe(task1);
 
-    taskFound = findTask(toDoListTesting, undefined, "Finish test");
+    taskFound = Task.findTask(toDoListTesting, undefined, "Finish test");
     expect(taskFound).toBe(task2);
 });
 
 test('I need to mark a task as complete', () => {
     let idToComplete = 2;
 
-    let check: boolean = markTaskAsCompleted(toDoListTesting, idToComplete);
+    let check: boolean = Task.markTaskAsCompleted(toDoListTesting, idToComplete);
     expect(check).toBeTruthy();
 
-    expect(toDoListTesting[idToComplete - 1].complete).toBeTruthy();
+    expect(toDoListTesting[idToComplete - 1].isComplete).toBeTruthy();
 });
 
 test('I need to remove a task', () => {
-    let taskFound = findTask(toDoListTesting, 2);
-    let taskRemoved = removeTask(toDoListTesting, 2);
+    let taskFound = Task.findTask(toDoListTesting, 2);
+    let taskRemoved = Task.removeTask(toDoListTesting, 2);
     
     expect(taskRemoved).toBe(taskFound);
-    expect(findTask(toDoListTesting, undefined, "Finish test")).toBe(undefined);
+    expect(Task.findTask(toDoListTesting, undefined, "Finish test")).toBe(undefined);
 });
 
